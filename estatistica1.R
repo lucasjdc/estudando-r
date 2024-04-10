@@ -66,3 +66,40 @@ dist_freq_quantitativas_personalizadas <- cbind('Frequência' = frequencia, 'Por
 dist_freq_quantitativas_personalizadas[
   order(row.names(dist_freq_quantitativas_personalizadas)),
   ]
+
+# Distribuição de frequências para variáveis quantitativas (Classes de amplitude fixa)
+
+# Passo 1 - Definindo o número de classes
+
+n <- nrow(dados)
+
+# Regra de Sturges
+k <- 1 + (10/3) * log10(n)
+
+k <- round(k)
+
+# Passo 2 - Criar a tabela de frequências
+
+labels <- c(
+    '      0.00 |—|  11,764.70',
+    ' 11,764.70  —|  23,529.40',
+    ' 23,529.40  —|  35,294.10',
+    ' 35,294.10  —|  47,058.80',
+    ' 47,058.80  —|  58,823.50',
+    ' 58,823.50  —|  70,588.20',
+    ' 70,588.20  —|  82,352.90',
+    ' 82,352.90  —|  94,117.60',
+    ' 94,117.60  —| 105,882.00',
+    '105,882.00  —| 117,647.00',
+    '117,647.00  —| 129,412.00',
+    '129,412.00  —| 141,176.00',
+    '141,176.00  —| 152,941.00',
+    '152,941.00  —| 164,706.00',
+    '164,706.00  —| 176,471.00',
+    '176,471.00  —| 188,235.00',
+    '188,235.00  —| 200,000.00'
+)
+
+frequencia <- table(cut(x = dados$Renda, breaks = k, labels = labels, include.lowest = TRUE))
+percentual <- prop.table(frequencia) * 100
+dist_freq_quantitativas_amplitude_fixa <- cbind('Frequência' = frequencia, 'Porcentagem (%)' = percentual)
