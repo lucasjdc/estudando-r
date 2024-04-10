@@ -47,3 +47,22 @@ list(c(1, 2, 3, 4), c(5, 6, 7))
 medias <- tapply(dados$Renda, list(dados$Sexo, dados$Cor), mean)
 rownames(medias) <- c('Masculino', 'Feminino')
 colnames(medias) <- c('Indígena', 'Branca', 'Preta', 'Amarela', 'Parda')
+
+# Distribuição de frequências para variáveis quantitativas - Classes personalizadas
+
+min(dados$Renda)
+max(dados$Renda)
+
+classes <- c(0, 1576, 3152, 7880, 15760, 200000)
+
+labels <- c('E', 'D', 'C', 'B', 'A')
+
+frequencia <- table(cut(x = dados$Renda, breaks = classes, labels = labels, include.lowest = TRUE))
+
+percentual <- prop.table(frequencia) * 100
+
+dist_freq_quantitativas_personalizadas <- cbind('Frequência' = frequencia, 'Porcentagem (%)' = percentual)
+
+dist_freq_quantitativas_personalizadas[
+  order(row.names(dist_freq_quantitativas_personalizadas)),
+  ]
