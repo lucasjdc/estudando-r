@@ -36,3 +36,14 @@ colnames(dist_freq_qualitativas) <- c('Frequência', 'Porcentagem (%)')
 
 rownames(dist_freq_qualitativas) <- c('Masculino', 'Feminino')
 
+# Distribuição de frequências para variáveis qualitativas - Método 2
+
+frequencia <- table(dados$Sexo, dados$Cor)
+rownames(frequencia) <- c('Masculino', 'Feminino')
+colnames(frequencia) <- c('Indígena', 'Branca', 'Preta', 'Amarela', 'Parda')
+frequencia <- cbind(frequencia)
+percentual <- prop.table(frequencia) * 100
+list(c(1, 2, 3, 4), c(5, 6, 7))
+medias <- tapply(dados$Renda, list(dados$Sexo, dados$Cor), mean)
+rownames(medias) <- c('Masculino', 'Feminino')
+colnames(medias) <- c('Indígena', 'Branca', 'Preta', 'Amarela', 'Parda')
